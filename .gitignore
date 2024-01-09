@@ -1,0 +1,61 @@
+# Dependencias
+/node_modules
+/package-lock.json
+/npm-debug.log
+/yarn-error.log
+
+# Configuraciones de la IDE
+/.vscode
+/.idea
+/*.sublime-workspace
+/*.sublime-project
+
+# Sistema Operativo
+.DS_Store
+Thumbs.db
+
+# Credenciales de Firebase
+**/config/*.json
+**/secrets/*.json
+
+# Carpeta de distribución/build
+/dist
+/build
+/.next
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Directorio de salida de la compilación
+/out
+
+# Dependencias locales
+.jekyll-metadata
+
+# Parcel
+.cache
+.parcel-cache
+
+# Misc
+.sass-cache
+.connect.lock
+/coverage
+/libpeerconnection.log
+.lock-wscript
+/.nyc_output
+/.grunt
+/.npm
+/hs_err_pid*
+
+# Credenciales Firebase 
+/api/config/*.json

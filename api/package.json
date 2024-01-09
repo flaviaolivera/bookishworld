@@ -1,0 +1,26 @@
+{
+  "name": "bookishworld",
+  "version": "1.0.0",
+  "description": "books app ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flaviaolivera/bookishworld.git"
+  },
+  "keywords": [
+    "book"
+  ],
+  "author": "Flavia Olivera",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flaviaolivera/bookishworld/issues"
+  },
+  "homepage": "https://github.com/flaviaolivera/bookishworld#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "firebase-admin": "^12.0.0"
+  }
+}
