@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
-import {RouteProp} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '../App';
-import {Book} from '../interfaces/Book';
+import React, { useState } from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import  {RouteProp, useFocusEffect } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../App';
+import { Book } from '../interfaces/Book';
 
 // Definiciones de tipos para props de navegación y parámetros de ruta
 type BookDetailsScreenRouteProp = RouteProp<RootStackParamList, 'BookDetails'>;
@@ -23,20 +23,20 @@ const BookDetailsScreen = ({
   const {bookId} = route.params;
   const [book, setBook] = useState<Book | null>(null);
 
-
-  useEffect(() => {
-    const fetchBookDetails = async () => {
-      try {
-        let response = await fetch(`http://10.0.2.2:3000/books/${bookId}`);
-        let data = await response.json();
-        setBook(data);
-      } catch (error) {
-        console.error('Error fetching book details:', error);
-      }
-    };
-
-    fetchBookDetails();
-  }, [bookId]);
+  const fetchBookDetails = async () => {
+    try {
+      let response = await fetch(`http://10.0.2.2:3000/books/${bookId}`);
+      let data = await response.json();
+      setBook(data);
+    } catch (error) {
+      console.error('Error fetching book details:', error);
+    }
+  };
+  useFocusEffect(
+    React.useCallback(() => {
+        fetchBookDetails(); // Llama a fetchBooksDetails cada vez que la pantalla gana foco
+    }, [bookId])
+  );
 
   if (!book) {
     return <Text style={styles.loading}>Loading...</Text>; // Mostrar un mensaje de carga mientras se obtienen los datos
