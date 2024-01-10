@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { Book } from '../interfaces/Book';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../App';
 
@@ -10,19 +10,22 @@ const HomeScreen = () => {
   const [books, setBooks] = useState<Book[]>([]); // Usando la interfaz Book para el estado
   const navigation = useNavigation<StackNavigationProp<RootStackParamList, 'Home'>>();
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        let response = await fetch('http://10.0.2.2:3000/books');
-        let json = await response.json();
-        setBooks(json);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchBooks();
-  }, []);
+  const fetchBooks = async () => {
+    try {
+      let response = await fetch('http://10.0.2.2:3000/books');
+      let json = await response.json();
+      setBooks(json);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  // Efecto para cargar los libros inicialmente
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchBooks(); // Llama a fetchBooks cada vez que la pantalla gana foco
+    }, [])
+  );
 
   const renderItem = ({item}: {item: Book}) => (
     <TouchableOpacity
